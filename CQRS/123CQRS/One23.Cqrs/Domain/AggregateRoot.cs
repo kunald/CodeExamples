@@ -38,8 +38,10 @@ namespace Insight.Cqrs.Domain
 
         protected void ApplyChange(Event @event)
         {
-            @event.Version = Version;
+            
             ApplyChange(@event, true);
+            this.Version++;
+            @event.Version = Version;
         }
 
         private void ApplyChange(Event @event, bool isNew)

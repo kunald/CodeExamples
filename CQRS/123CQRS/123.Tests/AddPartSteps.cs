@@ -17,7 +17,7 @@ namespace _123.Tests
         private IRepository<Part> irepo;
 
         [Given(@"a user has entered information about a Part")] 
-        public void GivenAUserHasEnteredInformationAboutAPart()
+        public void GivenAUserHasEnteredInformationAboutAPart() 
         {
             tmpGuid = Guid.NewGuid();
             newPart = new PartDto();
