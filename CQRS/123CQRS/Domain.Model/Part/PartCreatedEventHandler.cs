@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Events;
-using Insight.Cqrs.EventHandlers;
-using Insight.Cqrs.ReadOnlyStorage;
+using Insight123.Base;
+using Insight123.Contract;
+using Insight123.Dto;
 
 namespace Domain.EventHandlers
 {
@@ -21,10 +22,10 @@ namespace Domain.EventHandlers
             PartDto item = new PartDto()
             {
                 Id = handle.AggregateId,
-                PartNumber=handle.PartNumber,
-                PartDescription=handle.PartDescription,
-                SalesLeadTime=handle.SalesLeadTime,
-                UnitOfMeasure=handle.UnitOfMeasure,
+                PartNumber = handle.PartNumber,
+                PartDescription = handle.PartDescription,
+                SalesLeadTime = handle.SalesLeadTime,
+                UnitOfMeasure = handle.UnitOfMeasure,
             };
 
             _reportDatabase.Add(item);

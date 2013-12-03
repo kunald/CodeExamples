@@ -1,5 +1,5 @@
-﻿using Insight.Cqrs.Commands;
-using System;
+﻿using System;
+using Insight123.Base;
 
 namespace Domain.Commands
 {
@@ -11,7 +11,7 @@ namespace Domain.Commands
         public int SalesLeadTime { get; private set; }
 
         public CreatePartCommand(Guid aggregateId, string partNumber, string partDescription, int unitOfMeasure, int salesLeadTime)
-            : base(aggregateId)
+            : base(aggregateId, -1)
         {
             SalesLeadTime = salesLeadTime;
             UnitOfMeasure = unitOfMeasure;

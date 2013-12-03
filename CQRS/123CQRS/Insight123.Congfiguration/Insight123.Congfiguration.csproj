@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7D359B6-E474-41ED-8EF8-4AB5ED9B0BC6}</ProjectGuid>
+    <ProjectGuid>{50D852C0-67EF-42C5-9C77-FF612106614C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.Model</RootNamespace>
-    <AssemblyName>Domain.Model</AssemblyName>
+    <RootNamespace>Insight123.Congfiguration</RootNamespace>
+    <AssemblyName>Insight123.Congfiguration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,28 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Company.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="Part\ChangePartDescriptionCommand.cs" />
-    <Compile Include="Part\CreatePartCommand.cs" />
-    <Compile Include="Part\PartCommandHandler.cs" />
-    <Compile Include="Part\NonExistingPartException.cs" />
-    <Compile Include="Part\Part.cs" />
-    <Compile Include="Part\PartCreatedEvent.cs" />
-    <Compile Include="Part\PartCreatedEventHandler.cs" />
-    <Compile Include="Part\PartDescriptionChangedEvent.cs" />
-    <Compile Include="Part\PartDescriptionChangedEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Insight123.Contract\Insight123.Contract.csproj">
       <Project>{97a60ddc-dc19-4b45-8f46-91326e99558c}</Project>
       <Name>Insight123.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Insight123.Dto\Insight123.Dto.csproj">
-      <Project>{df92846b-525f-4d7c-b959-48f558a3d734}</Project>
-      <Name>Insight123.Dto</Name>
+    <ProjectReference Include="..\Insight123.Reporting\Insight123.Reporting.csproj">
+      <Project>{cb94db81-d141-4266-8e9f-3530c683ff3b}</Project>
+      <Name>Insight123.Reporting</Name>
     </ProjectReference>
     <ProjectReference Include="..\One23.Cqrs\Insight123.Base.csproj">
       <Project>{95df0381-2b1e-4ed4-8dfb-fc48ae55f107}</Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Insight.Cqrs.Exceptions
+namespace Insight123.Base.Exceptions
 {
     public class UnregisteredDomainEventException : Exception
     {

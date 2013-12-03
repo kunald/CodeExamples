@@ -1,16 +1,15 @@
 ﻿using System;
 using Domain.Commands;
 using Domain.Model.Part;
-using Insight.Cqrs.CommandHandler;
-using Insight.Cqrs.Storage;
+using Insight123.Contract;
 
 namespace Domain.CommandHandlers
 {
-    public class PartCommandHandler : ICommandHandler<CreatePartCommand>,ICommandHandler<ChangePartDescriptionCommand>
+    public class PartCommandHandler : ICommandHandler<CreatePartCommand>, ICommandHandler<ChangePartDescriptionCommand>
     {
-        private IRepository<Part> _repository;
+        private IRepository<IEvent> _repository;
 
-        public PartCommandHandler(IRepository<Part> repository)
+        public PartCommandHandler(IRepository<IEvent> repository)
         {
             _repository = repository;
         }
@@ -25,12 +24,12 @@ namespace Domain.CommandHandlers
                 throw new InvalidOperationException("Repository is not initialized.");
             }
             var aggregate = Part.CreateNewPart(command.Id, command.PartNumber, command.PartDescription, command.UnitOfMeasure, command.SalesLeadTime);
-            _repository.Save(aggregate, aggregate.Version);
+            _repository.Save(aggregate, command.Version);
         }
 
         public void Execute(ChangePartDescriptionCommand command)
         {
-             if (command == null)
+            if (command == null)
             {
                 throw new ArgumentNullException("command");
             }
@@ -39,9 +38,9 @@ namespace Domain.CommandHandlers
                 throw new InvalidOperationException("Repository is not initialized.");
             }
 
-            var aggregate = _repository.GetById(command.Id);
+            var aggregate = _repository.GetById<Part>(command.Id);
             aggregate.ChangePartDescription(command.PartDescription);
-            _repository.Save(aggregate, aggregate.Version);
+            _repository.Save(aggregate, command.Version);
         }
     }
 }

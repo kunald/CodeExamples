@@ -74,9 +74,21 @@
       <Project>{b7d359b6-e474-41ed-8ef8-4ab5ed9b0bc6}</Project>
       <Name>Domain.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\One23.Cqrs\Insight.Cqrs.csproj">
+    <ProjectReference Include="..\Insight123.Congfiguration\Insight123.Congfiguration.csproj">
+      <Project>{50d852c0-67ef-42c5-9c77-ff612106614c}</Project>
+      <Name>Insight123.Congfiguration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Insight123.Contract\Insight123.Contract.csproj">
+      <Project>{97a60ddc-dc19-4b45-8f46-91326e99558c}</Project>
+      <Name>Insight123.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Insight123.Dto\Insight123.Dto.csproj">
+      <Project>{df92846b-525f-4d7c-b959-48f558a3d734}</Project>
+      <Name>Insight123.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\One23.Cqrs\Insight123.Base.csproj">
       <Project>{95df0381-2b1e-4ed4-8dfb-fc48ae55f107}</Project>
-      <Name>Insight.Cqrs</Name>
+      <Name>Insight123.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

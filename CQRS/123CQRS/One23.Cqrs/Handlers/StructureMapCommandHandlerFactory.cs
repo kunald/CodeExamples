@@ -1,15 +1,14 @@
-﻿using Insight.Cqrs.CommandHandler;
-using Insight.Cqrs.Commands;
+﻿using Insight123.Contract;
 using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Insight.Cqrs.Handlers
+namespace Insight123.Base
 {
     public class StructureMapCommandHandlerFactory : ICommandHandlerFactory
     {
-        public ICommandHandler<T> GetHandler<T>() where T : Command
+        public ICommandHandler<T> GetHandler<T>() where T : ICommand
         {
             var handlers = GetHandlerTypes<T>().ToList();
 
@@ -19,7 +18,7 @@ namespace Insight.Cqrs.Handlers
             return cmdHandler;
         }
         
-        private IEnumerable<Type> GetHandlerTypes<T>() where T : Command
+        private IEnumerable<Type> GetHandlerTypes<T>()
         {
             var handlers = typeof(T).Assembly.GetExportedTypes()
                 .Where(x => x.GetInterfaces()

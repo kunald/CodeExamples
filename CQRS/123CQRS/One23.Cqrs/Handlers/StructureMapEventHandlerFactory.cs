@@ -1,15 +1,14 @@
-﻿using Insight.Cqrs.EventHandlers;
-using Insight.Cqrs.Events;
+﻿using Insight123.Contract;
 using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Insight.Cqrs.Handlers
+namespace Insight123.Base.Handlers
 {
     public class StructureMapEventHandlerFactory : IEventHandlerFactory
     {
-        public IEnumerable<IEventHandler<T>> GetHandlers<T>() where T : Event
+        public IEnumerable<IEventHandler<T>> GetHandlers<T>() where T : IEvent
         {
             var handlers = GetHandlerType<T>();
             
@@ -17,7 +16,7 @@ namespace Insight.Cqrs.Handlers
             return lstHandlers;
         }
 
-        private static IEnumerable<Type> GetHandlerType<T>() where T : Event
+        private static IEnumerable<Type> GetHandlerType<T>()
         {/*
             var handlers = typeof(IEventHandler<T>).Assembly.GetExportedTypes()
                 .Where(x => x.GetInterfaces()

@@ -1,5 +1,5 @@
 ﻿using System;
-using Insight.Cqrs.Events;
+using Insight123.Base;
 
 namespace Domain.Events
 {

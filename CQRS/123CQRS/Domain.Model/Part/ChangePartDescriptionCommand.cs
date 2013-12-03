@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Insight.Cqrs.Commands;
+using Insight123.Base;
 
 namespace Domain.Commands
 {
@@ -11,7 +11,8 @@ namespace Domain.Commands
     {
         public string PartDescription { get; private set; }
 
-        public ChangePartDescriptionCommand(Guid aggregateId, string partDescription) : base(aggregateId)
+        public ChangePartDescriptionCommand(Guid aggregateId, string partDescription, int version)
+            : base(aggregateId, version)
         {
             PartDescription = partDescription;
         }

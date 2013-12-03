@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Insight.Cqrs.Exceptions
+namespace Insight123.Base.Exceptions
 {
     public class AggregateNotFoundException : Exception
     {

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Model.Part;
-using Insight.Cqrs.EventHandlers;
-using Insight.Cqrs.ReadOnlyStorage;
+﻿using Domain.Model.Part;
+using Insight123.Contract;
 
 namespace Domain.EventHandlers
 {

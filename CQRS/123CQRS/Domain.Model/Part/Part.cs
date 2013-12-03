@@ -1,11 +1,11 @@
 ﻿using System;
 using Domain.Events;
-using Insight.Cqrs.Domain;
-using Insight.Cqrs.Events;
+using Insight123.Base;
+using Insight123.Contract;
 
 namespace Domain.Model.Part
 {
-    public class Part : AggregateRoot,
+    public class Part : AggregateRoot<IEvent>,
          IHandle<PartCreatedEvent>,IHandle<PartDescriptionChangedEvent>
     {
         public string PartNumber { get; private set; }
