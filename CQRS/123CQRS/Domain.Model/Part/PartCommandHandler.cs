@@ -5,15 +5,15 @@ using Insight123.Contract;
 
 namespace Domain.CommandHandlers
 {
-    public class PartCommandHandler : ICommandHandler<CreatePartCommand>, ICommandHandler<ChangePartDescriptionCommand>
+    public class PartCommandHandler : ICommandHandler<CreatePart>, ICommandHandler<ChangePartDescription>
     {
-        private IRepository<IEvent> _repository;
+        private IDomainRepository _repository;
 
-        public PartCommandHandler(IRepository<IEvent> repository)
+        public PartCommandHandler(IDomainRepository repository)
         {
             _repository = repository;
         }
-        public void Execute(CreatePartCommand command)
+        public void Execute(CreatePart command)
         {
             if (command == null)
             {
@@ -27,7 +27,7 @@ namespace Domain.CommandHandlers
             _repository.Save(aggregate, command.Version);
         }
 
-        public void Execute(ChangePartDescriptionCommand command)
+        public void Execute(ChangePartDescription command)
         {
             if (command == null)
             {

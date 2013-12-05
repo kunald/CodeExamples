@@ -10,14 +10,14 @@ using Insight123.Dto;
 
 namespace Domain.EventHandlers
 {
-    public class PartCreatedEventHandler : IEventHandler<PartCreatedEvent>
+    public class PartCreatedEventHandler : IEventHandler<PartCreated>
     {
         private readonly IReadRepository _reportDatabase;
         public PartCreatedEventHandler(IReadRepository reportDatabase)
         {
             _reportDatabase = reportDatabase;
         }
-        public void Handle(PartCreatedEvent handle)
+        public void Handle(PartCreated handle)
         {
             PartDto item = new PartDto()
             {

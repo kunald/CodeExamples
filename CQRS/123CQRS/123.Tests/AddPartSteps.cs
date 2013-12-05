@@ -15,7 +15,7 @@ namespace _123.Tests
     {
         PartDto newPart;
         private Guid tmpGuid;
-        private IRepository<IEvent> irepo;
+        private IDomainRepository irepo;
 
         [Given(@"a user has entered information about a Part")]
         public void GivenAUserHasEnteredInformationAboutAPart()
@@ -23,7 +23,7 @@ namespace _123.Tests
             tmpGuid = Guid.NewGuid();
             newPart = new PartDto();
             newPart.Id = tmpGuid;
-            newPart.PartDescription = "PC";
+            //newPart.PartDescription = "PC";
             newPart.PartNumber = "PC/1000";
             newPart.UnitOfMeasure = 1;
             newPart.SalesLeadTime = 5;
@@ -32,14 +32,15 @@ namespace _123.Tests
         [Then(@"that Part should be stored in the system")]
         public void ThenThatPartShouldBeStoredInTheSystem()
         {
-            ServiceLocator.CommandBus.Send(new CreatePartCommand(newPart.Id, newPart.PartNumber, newPart.PartDescription, newPart.UnitOfMeasure, newPart.SalesLeadTime));
+            ServiceLocator.CommandBus.Send(new CreatePart(newPart.Id, newPart.PartNumber, newPart.PartDescription, newPart.UnitOfMeasure, newPart.SalesLeadTime));
             Assert.IsNotNull(ServiceLocator.ReportDatabase.GetById(tmpGuid));
+            //Assert.AreEqual(newPart,ServiceLocator.ReportDatabase.GetById(tmpGuid))
         }
 
         [When(@"user user change the Description")]
         public void WhenUserUserChangeTheDescription()
         {
-            ServiceLocator.CommandBus.Send(new ChangePartDescriptionCommand(tmpGuid, "This has been changed", 0));
+            ServiceLocator.CommandBus.Send(new ChangePartDescription(tmpGuid, "This has been changed", 0));
         }
         [Then(@"the description of that part should be updated")]
         public void ThenTheDescriptionOfThatPartShouldBeUpdated()
@@ -50,7 +51,7 @@ namespace _123.Tests
         [When(@"the user change the UnitOfMeasure")]
         public void WhenTheUserChangeTheUnitOfMeasure()
         {
-            ServiceLocator.CommandBus.Send(new ChangePartDescriptionCommand(tmpGuid, "This has been changed twice", 1));
+            ServiceLocator.CommandBus.Send(new ChangePartDescription(tmpGuid, "This has been changed twice", 1));
         }
         [Then(@"the UnitOfMeasure of that part should be update")]
         public void ThenTheUnitOfMeasureOfThatPartShouldBeUpdate()

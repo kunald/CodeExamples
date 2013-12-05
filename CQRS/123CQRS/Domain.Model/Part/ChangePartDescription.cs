@@ -7,11 +7,11 @@ using Insight123.Base;
 
 namespace Domain.Commands
 {
-    public class ChangePartDescriptionCommand : Command
+    public class ChangePartDescription : Command
     {
         public string PartDescription { get; private set; }
 
-        public ChangePartDescriptionCommand(Guid aggregateId, string partDescription, int version)
+        public ChangePartDescription(Guid aggregateId, string partDescription, int version)
             : base(aggregateId, version)
         {
             PartDescription = partDescription;

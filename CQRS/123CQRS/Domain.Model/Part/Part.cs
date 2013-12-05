@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Domain.Events;
 using Insight123.Base;
 using Insight123.Contract;
 
 namespace Domain.Model.Part
 {
-    public class Part : AggregateRoot<IEvent>,
-         IHandle<PartCreatedEvent>,IHandle<PartDescriptionChangedEvent>
+    public class Part : AggregateRoot,
+         IHandle<PartCreated>, IHandle<PartDescriptionChanged>
     {
         public string PartNumber { get; private set; }
         public string PartDescription { get; private set; }
@@ -18,10 +21,11 @@ namespace Domain.Model.Part
 
         }
 
-        public Part(Guid partId, string partNumber, string partDescription, int unitOfMeasure, int salesLeadTime) : this()
+        public Part(Guid partId, string partNumber, string partDescription, int unitOfMeasure, int salesLeadTime)
+            : this()
         {
             // Should check for business validation here 
-            ApplyChange(new PartCreatedEvent(partId, partNumber, partDescription, unitOfMeasure, salesLeadTime));
+            ApplyChange(new PartCreated(partId, partNumber, partDescription, unitOfMeasure, salesLeadTime));
         }
 
         public static Part CreateNewPart(Guid partId, string partNumber, string partDescription, int unitOfMeasure, int salesLeadTime)
@@ -32,11 +36,11 @@ namespace Domain.Model.Part
         public void ChangePartDescription(string partDescription)
         {
             IsPartCreated();
-            ApplyChange(new PartDescriptionChangedEvent(Id, partDescription));
+            ApplyChange(new PartDescriptionChanged(Id, partDescription));
         }
 
 
-        public void Handle(PartCreatedEvent e)
+        public void Handle(PartCreated e)
         {
             Id = e.AggregateId;
             SalesLeadTime = e.SalesLeadTime;
@@ -46,7 +50,7 @@ namespace Domain.Model.Part
 
         }
 
-        public void Handle(PartDescriptionChangedEvent e)
+        public void Handle(PartDescriptionChanged e)
         {
             Id = e.AggregateId;
             PartDescription = e.PartDescription;
@@ -58,5 +62,6 @@ namespace Domain.Model.Part
             if (Id == Guid.Empty)
                 throw new NonExistingPartException("The Part is not created.");
         }
+
     }
 }

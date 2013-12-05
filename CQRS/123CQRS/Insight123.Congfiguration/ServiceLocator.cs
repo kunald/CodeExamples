@@ -1,4 +1,6 @@
-﻿using Insight123.Base;
+﻿using System.Net;
+using EventStore.ClientAPI;
+using Insight123.Base;
 using Insight123.Base.Handlers;
 using Insight123.Contract;
 using Insight123.Reporting;
@@ -26,6 +28,7 @@ namespace Insight123.Configuration
         }
 
 
+
         public static ICommandBus CommandBus
         {
             get { return _commandBus; }
@@ -40,20 +43,23 @@ namespace Insight123.Configuration
 
     static class ContainerBootstrapper
     {
+        //private static IPAddress ip = new IPAddress(new byte[] { 127, 0, 0, 1 });
+        //private static readonly IPEndPoint IntegrationTestTcpEndPoint = new IPEndPoint(ip, 1113);
         public static void BootstrapStructureMap()
         {
 
             ObjectFactory.Initialize(x =>
-            {
-                x.For(typeof(IRepository<>)).Singleton().Use(typeof(Repository<>));
-                x.For(typeof(IEventStorage<>)).Singleton().Use(typeof(InMemoryEventStorage<>));
-                x.For<IEventBus>().Use<EventBus>();
-                x.For<ICommandHandlerFactory>().Use<StructureMapCommandHandlerFactory>();
-                x.For<IEventHandlerFactory>().Use<StructureMapEventHandlerFactory>();
-                x.For<ICommandBus>().Use<CommandBus>();
-                x.For<IEventBus>().Use<EventBus>();
-                x.For<IReadRepository>().Use<PartReadRepo>();
-            });
+                {
+                    //x.For<IEventStoreConnection>().Use(() => EventStoreConnection.Create(IntegrationTestTcpEndPoint));
+                    x.For<IDomainRepository>().Singleton().Use<DomainRepository>();
+                    //x.For<IEventStorage>().Singleton().Use<InsightEventStore>();
+                    x.For<IEventBus>().Use<EventBus>();
+                    x.For<ICommandHandlerFactory>().Use<StructureMapCommandHandlerFactory>();
+                    x.For<IEventHandlerFactory>().Use<StructureMapEventHandlerFactory>();
+                    x.For<ICommandBus>().Use<CommandBus>();
+                    x.For<IEventBus>().Use<EventBus>();
+                    x.For<IReadRepository>().Use<PartReadRepo>();
+                });
         }
     }
 }

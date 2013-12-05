@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EventStore.ClientAPI">
+      <HintPath>..\lib\EventStore.ClientAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\lib\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\StructureMap.dll</HintPath>
@@ -47,6 +56,8 @@
     <Compile Include="AggregateRoot.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EventStore.cs" />
+    <Compile Include="Exceptions\AggregateDeletedException.cs" />
     <Compile Include="InMemoryEventStorage.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Converter.cs" />
@@ -60,7 +71,7 @@
     <Compile Include="CommandBus.cs" />
     <Compile Include="EventBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="DomainRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Insight123.Contract\Insight123.Contract.csproj">

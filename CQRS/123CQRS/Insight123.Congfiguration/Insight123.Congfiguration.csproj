@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EventStore.ClientAPI, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\EventStore.ClientAPI.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\lib\StructureMap.dll</HintPath>
     </Reference>

@@ -5,9 +5,9 @@ using Insight123.Contract;
 
 namespace Insight123.Base
 {
-    public abstract class AggregateRoot<TEvent> : IEventProvider<TEvent> where TEvent : IEvent
+    public abstract class AggregateRoot : IEventProvider
     {
-        private readonly List<TEvent> _changes;
+        private readonly List<IEvent> _changes;
 
         public Guid Id { get; protected set; }
         public int Version { get; protected set; }
@@ -17,7 +17,7 @@ namespace Insight123.Base
         {
             Version = -1;
             EventVersion = -1;
-            _changes = new List<TEvent>();
+            _changes = new List<IEvent>();
         }
 
         public void MarkChangesAsCommitted()
@@ -25,7 +25,7 @@ namespace Insight123.Base
             _changes.Clear();
         }
 
-        protected void ApplyChange(TEvent @event)
+        protected void ApplyChange(IEvent @event)
         {
             ApplyChange(@event, true);
             EventVersion++;
@@ -33,7 +33,7 @@ namespace Insight123.Base
 
         }
 
-        private void ApplyChange(TEvent @event, bool isNew)
+        private void ApplyChange(IEvent @event, bool isNew)
         {
             dynamic d = this;
 
@@ -45,14 +45,14 @@ namespace Insight123.Base
 
         }
 
-        public void LoadsFromHistory(IEnumerable<TEvent> history)
+        public void LoadsFromHistory(IEnumerable<IEvent> history)
         {
             foreach (var e in history) ApplyChange(e, false);
             Version = history.Last().Version;
             EventVersion = Version;
         }
 
-        IEnumerable<TEvent> IEventProvider<TEvent>.GetUncommittedChanges()
+        IEnumerable<IEvent> IEventProvider.GetUncommittedChanges()
         {
             return _changes;
         }

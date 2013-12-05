@@ -7,14 +7,14 @@ using Insight123.Contract;
 
 namespace Insight123.Base
 {
-    public class InMemoryEventStorage<TEvent> : IEventStorage<TEvent> where TEvent : IEvent
+    public class InMemoryEventStorage : IEventStorage
     {
-        private List<TEvent> _events;
+        private List<IEvent> _events;
         private readonly IEventBus _eventBus;
 
         public InMemoryEventStorage(IEventBus eventBus)
         {
-            _events = new List<TEvent>();
+            _events = new List<IEvent>();
             _eventBus = eventBus;
         }
 
@@ -30,7 +30,22 @@ namespace Insight123.Base
             return System.Convert.ChangeType(source, dest);
         }
 
-        public IEnumerable<TEvent> GetEvents(Guid aggregateId)
+        public void Save(IEventProvider eventProvider)
+        {
+            var uncommittedChanges = eventProvider.GetUncommittedChanges();
+
+            foreach (var @event in uncommittedChanges)
+            {
+                _events.Add(@event);
+            }
+            foreach (var @event in uncommittedChanges)
+            {
+                var desEvent = ChangeTo(@event, @event.GetType());
+                _eventBus.Publish(desEvent);
+            }
+        }
+
+        public IEnumerable<IEvent> GetAllEvents(Guid aggregateId)
         {
             var events = _events.Where(p => p.AggregateId == aggregateId).Select(p => p);
             if (!events.Any())
@@ -40,22 +55,15 @@ namespace Insight123.Base
             return events;
         }
 
-        public void Save<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : class, IEventProvider<TEvent>, new()
-        {
-            var uncommittedChanges = aggregateRoot.GetUncommittedChanges();
-            //var version = aggregateRoot.Version;
 
-            foreach (var @event in uncommittedChanges)
-            {
-                //version++;
-                //@event.Version = version;
-                _events.Add(@event);
-            }
-            foreach (var @event in uncommittedChanges)
-            {
-                var desEvent = ChangeTo(@event, @event.GetType());
-                _eventBus.Publish(desEvent);
-            }
+        public IEnumerable<IEvent> GetEventsFromVersion<TAggregate>(Guid aggregateId, int version) where TAggregate : class, IEventProvider, new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IEvent> GetAllEvents<TAggregate>(Guid aggregateId) where TAggregate : class, IEventProvider, new()
+        {
+            throw new NotImplementedException();
         }
     }
 }
