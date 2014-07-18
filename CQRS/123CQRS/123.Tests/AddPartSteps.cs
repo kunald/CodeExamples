@@ -23,7 +23,7 @@ namespace _123.Tests
             tmpGuid = Guid.NewGuid();
             newPart = new PartDto();
             newPart.Id = tmpGuid;
-            //newPart.PartDescription = "PC";
+            newPart.PartDescription = "PC";
             newPart.PartNumber = "PC/1000";
             newPart.UnitOfMeasure = 1;
             newPart.SalesLeadTime = 5;

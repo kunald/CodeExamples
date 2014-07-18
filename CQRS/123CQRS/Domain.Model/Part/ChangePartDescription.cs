@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Insight123.Base;
+﻿using Insight123.Base;
+using System;
 
 namespace Domain.Commands
 {
+    [Serializable]
     public class ChangePartDescription : Command
     {
         public string PartDescription { get; private set; }

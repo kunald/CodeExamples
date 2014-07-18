@@ -7,7 +7,6 @@ namespace Insight123.Base
     public class Event : IEvent
     {
         public Guid AggregateId { get; set; }
-        public Guid Id { get; set; }
         public int Version { get; set; }
     }
 }

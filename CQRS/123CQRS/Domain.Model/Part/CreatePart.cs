@@ -5,6 +5,7 @@ using Insight123.Base;
 
 namespace Domain.Commands
 {
+    [Serializable]
     public class CreatePart : Command
     {
         public string PartNumber { get; private set; }

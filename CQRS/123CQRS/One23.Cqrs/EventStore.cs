@@ -54,7 +54,7 @@ namespace Insight123.Base
                 throw new InvalidOperationException("Cannot get version <= 0");
 
             var streamName = _aggregateIdToStreamName(typeof(TAggregate), aggregateId);
-            var aggregate = ConstructAggregate<TAggregate>();
+            //var aggregate = ConstructAggregate<TAggregate>();
 
             var sliceStart = 0;
             var sliceCount = sliceStart + ReadPageSize <= version

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7D359B6-E474-41ED-8EF8-4AB5ED9B0BC6}</ProjectGuid>
+    <ProjectGuid>{B2CA82DB-BDDB-473C-ACB3-EE37894BCFBB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.Model</RootNamespace>
-    <AssemblyName>Domain.Model</AssemblyName>
+    <RootNamespace>MassTransit</RootNamespace>
+    <AssemblyName>MassTransit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Magnum">
+      <HintPath>..\packages\Magnum.2.1.1\lib\NET40\Magnum.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit">
+      <HintPath>..\packages\MassTransit.2.9.0\lib\net40\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Transports.MSMQ">
+      <HintPath>..\packages\MassTransit.MSMQ.2.9.0\lib\net40\MassTransit.Transports.MSMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,35 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Company.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="Part\ChangePartDescription.cs" />
-    <Compile Include="Part\CreatePart.cs" />
-    <Compile Include="Part\DuplicateHandler.cs" />
-    <Compile Include="Part\PartCommandHandler.cs" />
-    <Compile Include="Part\NonExistingPartException.cs" />
-    <Compile Include="Part\Part.cs" />
-    <Compile Include="Part\PartCreated.cs" />
-    <Compile Include="Part\PartCreatedEventHandler.cs" />
-    <Compile Include="Part\PartDeleted.cs" />
-    <Compile Include="Part\PartDescriptionChanged.cs" />
-    <Compile Include="Part\PartDescriptionChangedEventHandler.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Insight123.Contract\Insight123.Contract.csproj">
-      <Project>{97a60ddc-dc19-4b45-8f46-91326e99558c}</Project>
-      <Name>Insight123.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Insight123.Dto\Insight123.Dto.csproj">
-      <Project>{df92846b-525f-4d7c-b959-48f558a3d734}</Project>
-      <Name>Insight123.Dto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\One23.Cqrs\Insight123.Base.csproj">
-      <Project>{95df0381-2b1e-4ed4-8dfb-fc48ae55f107}</Project>
-      <Name>Insight123.Base</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
